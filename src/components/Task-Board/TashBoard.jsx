@@ -9,7 +9,7 @@ export default function TashBoard() {
     title: "Learn React",
     description:
       "I want to learn React so that I can treat it like my slave and make it do whatever I want to do.",
-    tags: ["web", "react"],
+    tags: ["web", "react", "JS"],
     priority: "High",
     isFavorite: true,
   };
