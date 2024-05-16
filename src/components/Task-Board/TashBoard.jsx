@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddTaskModal from "./AddTaskModal";
 import Search from "./Search";
 import TaskAction from "./TaskAction";
 import TaskList from "./TaskList";
@@ -15,14 +16,20 @@ export default function TashBoard() {
   };
 
   const [tasks, setTasks] = useState([defaultTask]);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleAddTask = () => {
+    console.log("Add task");
+  };
   return (
     <>
       {/* <!-- Begin Table --> */}
       <section className="mb-20" id="tasks">
+        {showAddModal && <AddTaskModal />}
         <div className="container">
           <Search />
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <TaskAction />
+            <TaskAction onAddClik={() => setShowAddModal(true)} />
             <div className="overflow-auto">
               <TaskList tasks={tasks} />
             </div>
