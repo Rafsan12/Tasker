@@ -18,14 +18,16 @@ export default function TashBoard() {
   const [tasks, setTasks] = useState([defaultTask]);
   const [showAddModal, setShowAddModal] = useState(false);
 
-  const handleAddTask = () => {
-    console.log("Add task");
+  const handleAddTask = (newTask) => {
+    console.log("Add task", newTask);
+    setTasks([...tasks, newTask]);
+    setShowAddModal(false);
   };
   return (
     <>
       {/* <!-- Begin Table --> */}
       <section className="mb-20" id="tasks">
-        {showAddModal && <AddTaskModal />}
+        {showAddModal && <AddTaskModal onSave={handleAddTask} />}
         <div className="container">
           <Search />
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
