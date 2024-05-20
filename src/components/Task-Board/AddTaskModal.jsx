@@ -1,4 +1,27 @@
+import { useState } from "react";
+
 export default function AddTaskModal() {
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    tags: [],
+    priority: "",
+    isFavorite: false,
+  });
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    let value = event.target.value;
+
+    if (name === "tags") {
+      value = value.split(",");
+    }
+
+    setTask({
+      ...task,
+      [name]: value,
+    });
+  };
   return (
     <>
       {/* <!-- Add Task Form --> */}
@@ -22,6 +45,8 @@ export default function AddTaskModal() {
               className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
               type="text"
               name="title"
+              value={task.title}
+              onChange={handleChange}
               id="title"
               required
             />
@@ -33,6 +58,8 @@ export default function AddTaskModal() {
               className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
               type="text"
               name="description"
+              value={task.description}
+              onChange={handleChange}
               id="description"
               required
             ></textarea>
@@ -46,6 +73,8 @@ export default function AddTaskModal() {
                 className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 type="text"
                 name="tags"
+                value={task.tags}
+                onChange={handleChange}
                 id="tags"
                 required
               />
@@ -56,6 +85,8 @@ export default function AddTaskModal() {
               <select
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="priority"
+                value={task.priority}
+                onChange={handleChange}
                 id="priority"
                 required
               >
