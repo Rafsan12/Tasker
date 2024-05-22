@@ -1,14 +1,19 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
-export default function AddTaskModal({ onSave }) {
-  const [task, setTask] = useState({
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    tags: [],
-    priority: "",
-    isFavorite: false,
-  });
+export default function AddTaskModal({ onSave, taskToUpdate }) {
+  const [task, setTask] = useState(
+    taskToUpdate || {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      tags: [],
+      priority: "",
+      isFavorite: false,
+    }
+  );
+
+  const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null));
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -34,7 +39,7 @@ export default function AddTaskModal({ onSave }) {
       "
       >
         <h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
-          Add New Task
+          {isAdd ? "Add New Task" : "Edit Task"}
         </h2>
 
         {/* <!-- inputs --> */}
@@ -104,7 +109,7 @@ export default function AddTaskModal({ onSave }) {
           <button
             type="submit"
             className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
-            onClick={() => onSave(task)}
+            onClick={() => onSave(task, isAdd)}
           >
             Create new Task
           </button>
