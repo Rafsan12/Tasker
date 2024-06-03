@@ -55,6 +55,15 @@ export default function TashBoard() {
     setTaskToUpdate(null);
   };
 
+  const handleFavorite = (taskID) => {
+    const taskIndex = tasks.findIndex((task) => task.id === taskID);
+
+    const newTask = [...tasks];
+    newTask[taskIndex].isFavorite = !newTask[taskIndex].isFavorite;
+
+    setTasks(newTask);
+  };
+
   return (
     <>
       {/* <!-- Begin Table --> */}
@@ -78,6 +87,7 @@ export default function TashBoard() {
                 tasks={tasks}
                 onEdit={handleEditTask}
                 onDelete={handleDeleteTask}
+                onFav={handleFavorite}
               />
             </div>
           </div>
