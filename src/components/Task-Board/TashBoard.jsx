@@ -19,7 +19,7 @@ export default function TashBoard() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-  const handleAddTask = (newTask, isAdd) => {
+  const handleAddEditTask = (newTask, isAdd) => {
     if (isAdd) {
       setTasks([...tasks, newTask]);
     } else {
@@ -44,7 +44,10 @@ export default function TashBoard() {
       {/* <!-- Begin Table --> */}
       <section className="mb-20" id="tasks">
         {showAddModal && (
-          <AddTaskModal onSave={handleAddTask} taskToUpdate={taskToUpdate} />
+          <AddTaskModal
+            onSave={handleAddEditTask}
+            taskToUpdate={taskToUpdate}
+          />
         )}
         <div className="container">
           <Search />

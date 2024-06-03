@@ -111,7 +111,7 @@ export default function AddTaskModal({ onSave, taskToUpdate }) {
             className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
             onClick={() => onSave(task, isAdd)}
           >
-            Create new Task
+            {isAdd ? " Create new Task" : "Edit Your Task"}
           </button>
         </div>
       </form>
