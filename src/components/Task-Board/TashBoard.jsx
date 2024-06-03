@@ -39,6 +39,22 @@ export default function TashBoard() {
     setTaskToUpdate(task);
     setShowAddModal(true);
   };
+
+  const handleDeleteTask = (taskID) => {
+    const taskAfterDelete = tasks.filter((task) => task.id !== taskID);
+    setTasks(taskAfterDelete);
+  };
+
+  const handleDeleteAllClik = () => {
+    tasks.length = 0;
+    setTasks([...tasks]);
+  };
+
+  const handleCloseClick = () => {
+    setShowAddModal(false);
+    setTaskToUpdate(null);
+  };
+
   return (
     <>
       {/* <!-- Begin Table --> */}
@@ -46,15 +62,23 @@ export default function TashBoard() {
         {showAddModal && (
           <AddTaskModal
             onSave={handleAddEditTask}
+            onCloseClik={handleCloseClick}
             taskToUpdate={taskToUpdate}
           />
         )}
         <div className="container">
           <Search />
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <TaskAction onAddClik={() => setShowAddModal(true)} />
+            <TaskAction
+              onAddClik={() => setShowAddModal(true)}
+              onDeleteAllClik={handleDeleteAllClik}
+            />
             <div className="overflow-auto">
-              <TaskList tasks={tasks} onEdit={handleEditTask} />
+              <TaskList
+                tasks={tasks}
+                onEdit={handleEditTask}
+                onDelete={handleDeleteTask}
+              />
             </div>
           </div>
         </div>
